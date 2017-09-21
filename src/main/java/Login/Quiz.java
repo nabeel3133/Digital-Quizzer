@@ -20,4 +20,5 @@ public class Quiz implements java.io.Serializable{
     public List<String> QuestionsMarks;
     public List<String> QuestionType;
     public int QuizMarks;    
+    
 }
