@@ -1,9 +1,11 @@
 # Quizer
 Quiz Generator/Quizzer is an app, made in JFrame and JSwing which is used by two kinds of user. 
 1) Instructors 
-2) Students Instructors are able to use this app and make quizzes. 
+2) Students 
+Instructors are able to use this app and make quizzes. 
 This app lets Instructors to make quizzes by adding 3 types of questions, 
-which are: i) MCQS (Multiple Choice Questions) 
+which are: 
+i) MCQS (Multiple Choice Questions) 
 ii) True/False Questions 
 iii) Numeric Questions 
 While adding each question and the options for each question, the Instructor also puts in the maximum marks and the correct option of the question. 
