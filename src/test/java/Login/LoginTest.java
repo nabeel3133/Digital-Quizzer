@@ -29,7 +29,6 @@ public class LoginTest {
         instance.usernameField.setText("nabeel3133");     
         instance.passwordField.setText("123");
         instance.role = 1;       
-
         boolean b1 = instance.LoginFunction("nabeel3133","123","Instructor");
         assertTrue(b1);
         // TODO review the generated test code and remove the default call to fail.

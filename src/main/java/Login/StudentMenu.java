@@ -352,16 +352,12 @@ int check;
          i.printStackTrace();
          return null;
       }catch(ClassNotFoundException c) {
-         System.out.println("Employee class not found");
          c.printStackTrace();
          return null;
       }
       return e;  
 }
-        
-        
-    
-    
+            
     private void SelectButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SelectButton2ActionPerformed
         this.dispose();
         StudentAttemptsQuiz Quizer = new StudentAttemptsQuiz(userName,2);
@@ -424,7 +420,7 @@ int check;
             int QuestionNumber = Integer.parseInt(parts[4]);
              
             if(QuizNumber>0 && QuestionNumber == 1)
-             {
+            {
                 if(QuizNumber == 1)
                 {
                 Title1.setText(Title);                

@@ -132,18 +132,22 @@ public class TitleAndDescription extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void ProceedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ProceedActionPerformed
+    public boolean AddTitleAndDescription(String title, String description)
+    {
         if(TitleField.getText().isEmpty() && !DescriptionField.getText().isEmpty())
         {
         JOptionPane.showMessageDialog(null,"Please fill in the Title Field to proceed.","Title field empty",JOptionPane.ERROR_MESSAGE);                                                                          
+        return false;
         }
         else if(!TitleField.getText().isEmpty() && DescriptionField.getText().isEmpty())
         {
         JOptionPane.showMessageDialog(null,"Please fill in the Description Field to proceed.","Description field empty",JOptionPane.ERROR_MESSAGE);                                                                          
+        return false;
         }
         else if(TitleField.getText().isEmpty() && DescriptionField.getText().isEmpty())
         {
         JOptionPane.showMessageDialog(null,"Please fill in the Title & Description Field to proceed.","Description field empty",JOptionPane.ERROR_MESSAGE);                                                                                      
+        return false;
         }
         else
         {
@@ -151,7 +155,14 @@ public class TitleAndDescription extends javax.swing.JFrame {
         this.dispose();
         Instructor quizCreating = new Instructor(TitleField.getText(),DescriptionField.getText());
         quizCreating.setVisible(true);    
+        return true;
         }
+    }
+    
+    private void ProceedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ProceedActionPerformed
+        String title = TitleField.getText();
+        String description = DescriptionField.getText();
+        AddTitleAndDescription(title,description);
     }//GEN-LAST:event_ProceedActionPerformed
 
     /**
@@ -192,11 +203,11 @@ public class TitleAndDescription extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private java.awt.Label Description;
-    private javax.swing.JTextArea DescriptionField;
+    public javax.swing.JTextArea DescriptionField;
     private java.awt.Button Proceed;
     private java.awt.Label Title1;
     private java.awt.Label TitleAndDescripion;
-    private javax.swing.JTextField TitleField;
+    public javax.swing.JTextField TitleField;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables

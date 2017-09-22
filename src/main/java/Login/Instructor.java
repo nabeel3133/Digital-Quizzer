@@ -23,7 +23,7 @@ import java.io.FileOutputStream;
  * @author Nabeel Hussain Syed
  */
 public class Instructor extends javax.swing.JFrame{
-   private int QuestionType;  //1 for MCQ, 2 for TrueFalse, 3 for Numeric
+   public int QuestionType;  //1 for MCQ, 2 for TrueFalse, 3 for Numeric
    private int QuestionNumber;
    private int TotalScore;
    private int MaximumScore;
@@ -50,11 +50,6 @@ public class Instructor extends javax.swing.JFrame{
         MCQOptions = new ArrayList<String>();
         QuestMarks = new ArrayList<String>();
         MakeQuiz();
-    }
-    
-    public Instructor()
-    {
-        
     }
 
     /**
@@ -596,12 +591,13 @@ public class Instructor extends javax.swing.JFrame{
         QuestNum++;
     }
     
-    private void MultipleChoiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MultipleChoiceActionPerformed
-
+    public boolean MCQPanel()
+    {
         if (MaxScore.getText().isEmpty())
         {
         JOptionPane.showMessageDialog(null,"Maximum marks field left empty. Fill it out before selecting the type of the question","Maximum marks field is empty",JOptionPane.ERROR_MESSAGE);                                                              
         buttonGroup1.clearSelection();
+        return false;
         }
         else if (!MaxScore.getText().matches("[0-9]+") || (Integer.parseInt(MaxScore.getText()) == 0))
         {
@@ -611,20 +607,28 @@ public class Instructor extends javax.swing.JFrame{
         jPanel2.setVisible(false);
         jPanel3.setVisible(false);
         MaxScore.setText("");
+        return false;
         }
         else if(!MaxScore.getText().isEmpty() && (MaxScore.getText().matches("[0-9]+")) && (Integer.parseInt(MaxScore.getText()) != 0))
         {
         QuestionType = 1;
         showPanel();            
-        }    
+        return true;
+        }
+        return true;
+    }
+    
+    private void MultipleChoiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MultipleChoiceActionPerformed
+        MCQPanel();
     }//GEN-LAST:event_MultipleChoiceActionPerformed
 
-    private void NumericActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NumericActionPerformed
-   
+    public boolean NumericPanel()
+    {
         if (MaxScore.getText().isEmpty())
         {
         JOptionPane.showMessageDialog(null,"Maximum marks field left empty. Fill it out before selecting the type of the question","Maximum marks field is empty",JOptionPane.ERROR_MESSAGE);                                                              
         buttonGroup1.clearSelection();        
+        return false;
         }
         else if (!MaxScore.getText().matches("[0-9]+") || (Integer.parseInt(MaxScore.getText()) == 0))
         {
@@ -634,20 +638,29 @@ public class Instructor extends javax.swing.JFrame{
         jPanel2.setVisible(false);
         jPanel3.setVisible(false);
         MaxScore.setText("");
+        return false;
         } 
         else if(!MaxScore.getText().isEmpty() && (MaxScore.getText().matches("[0-9]+")) && (Integer.parseInt(MaxScore.getText()) != 0))
         {
         QuestionType = 3;
         showPanel();            
-        } 
+        return true;
+        }
+        return true;
+    }
+    
+    
+    private void NumericActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NumericActionPerformed
+        NumericPanel();
     }//GEN-LAST:event_NumericActionPerformed
 
-    private void TrueFalseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TrueFalseActionPerformed
-
+    public boolean TrueFalsePanel()
+    {
         if (MaxScore.getText().isEmpty())
         {
         JOptionPane.showMessageDialog(null,"Maximum marks field left empty. Fill it out before selecting the type of the question","Maximum marks field is empty",JOptionPane.ERROR_MESSAGE);                                                              
         buttonGroup1.clearSelection();               
+        return false;
         }
         else if ((!MaxScore.getText().isEmpty()) && (!MaxScore.getText().matches("[0-9]+")) || (Integer.parseInt(MaxScore.getText()) == 0))
         {
@@ -657,67 +670,86 @@ public class Instructor extends javax.swing.JFrame{
         jPanel2.setVisible(false);
         jPanel3.setVisible(false);
         MaxScore.setText("");
+        return false;
         }
         else if(!MaxScore.getText().isEmpty() && (MaxScore.getText().matches("[0-9]+")) && (Integer.parseInt(MaxScore.getText()) != 0))
         {
         QuestionType = 2;
         showPanel();            
-        }    
+        return true;
+        }
+        return true;
+    }
+    
+    private void TrueFalseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TrueFalseActionPerformed
+        TrueFalsePanel(); 
     }//GEN-LAST:event_TrueFalseActionPerformed
 
     private void ThirdOptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ThirdOptionActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_ThirdOptionActionPerformed
 
-    private void showPanel()
+    public boolean showPanel()
     {
         if((QuestionType==1 || QuestionType==2 || QuestionType==3) && !MaxScore.getText().matches("[0-9]+") || (Integer.parseInt(MaxScore.getText()) == 0))
         {
         JOptionPane.showMessageDialog(null,"Maximum Marks must be a number greater than 0.","Invalid input of Maximum marks",JOptionPane.ERROR_MESSAGE);                         
+        return false;
         }
         else if(QuestionType==1 && (MaxScore.getText().matches("[0-9]+")) && (Integer.parseInt(MaxScore.getText()) != 0))
         {
             jPanel1.setVisible(true);
             jPanel2.setVisible(false);
-            jPanel3.setVisible(false);
+            jPanel3.setVisible(false);        
+        return true;
         }
         else if(QuestionType==2 && (MaxScore.getText().matches("[0-9]+")) && (Integer.parseInt(MaxScore.getText()) != 0))        
         {
             jPanel2.setVisible(true);
             jPanel1.setVisible(false);
             jPanel3.setVisible(false);
+        return true;
         }
         else if(QuestionType==3 && (!MaxScore.getText().isEmpty()) && (MaxScore.getText().matches("[0-9]+")) && (Integer.parseInt(MaxScore.getText()) != 0))        
         {
             jPanel3.setVisible(true);
             jPanel1.setVisible(false);
             jPanel2.setVisible(false);
+        return true;
         }
+        return false;
     }
-    private void NextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NextActionPerformed
+    
+    public boolean MCQNextButton()
+    {
         if(QuestionType==1)
         {           
             if(MCQQuestion.getText().isEmpty())
             {
             JOptionPane.showMessageDialog(null,"Please type out the question before proceeding","Question field empty",JOptionPane.ERROR_MESSAGE);                                                   
+            return false;
             }
             else if(!MCQQuestion.getText().isEmpty())
             {
                 if(OptionA.getText().isEmpty() || OptionB.getText().isEmpty() || OptionC.getText().isEmpty() || OptionD.getText().isEmpty())
                 {
                 JOptionPane.showMessageDialog(null,"One or more options are left empty","Options empty",JOptionPane.ERROR_MESSAGE);                                                   
+                return false;
                 }
                 else if((!OptionA.getText().isEmpty() && !OptionB.getText().isEmpty() && !OptionC.getText().isEmpty() && !OptionD.getText().isEmpty()) && (!FirstOption.isSelected()&& !SecondOption.isSelected() && !ThirdOption.isSelected()&& !FourthOption.isSelected()))
                 {
                 JOptionPane.showMessageDialog(null,"Please select a correct option to continue","Correct option not selected",JOptionPane.ERROR_MESSAGE);                                                                                 
+                return false;
                 }
                 else if((!OptionA.getText().isEmpty() && !OptionB.getText().isEmpty() && !OptionC.getText().isEmpty() && !OptionD.getText().isEmpty()) && (FirstOption.isSelected() || SecondOption.isSelected() || ThirdOption.isSelected() || FourthOption.isSelected()) && (!MaxScore.getText().matches("[0-9]+")) || (Integer.parseInt(MaxScore.getText()) == 0))
                 {
                 JOptionPane.showMessageDialog(null,"Maximum Marks must be a number from 1 to 10","Invalid input of Maximum marks",JOptionPane.ERROR_MESSAGE);                                                                                       
+                return false;
                 }
                 else if((!OptionA.getText().isEmpty() && !OptionB.getText().isEmpty() && !OptionC.getText().isEmpty() && !OptionD.getText().isEmpty()) && (FirstOption.isSelected()|| SecondOption.isSelected() || ThirdOption.isSelected() || FourthOption.isSelected()) && (MaxScore.getText().isEmpty()))
                 {
                 JOptionPane.showMessageDialog(null,"Maximum Marks field cannot be left empty","Maximum marks field left empty",JOptionPane.ERROR_MESSAGE);                                                                                       
+                return false;
                 }
                 else
                 {
@@ -747,6 +779,7 @@ public class Instructor extends javax.swing.JFrame{
                 MaximumScore = Integer.parseInt(MaxScore.getText());
                 TotalScore = TotalScore + MaximumScore;                
                 JOptionPane.showMessageDialog(null,"Question "+QuestionNumber+" is saved. Marks of this question are: "+MaximumScore+ ".\nProceeding!","Proceed!",JOptionPane.INFORMATION_MESSAGE);                                                                                       
+                
                 try
                 {
                 File file = new File("Quizzes.txt");
@@ -792,8 +825,7 @@ public class Instructor extends javax.swing.JFrame{
                 System.out.println("Error: " + e);
                 e.printStackTrace( );
                 systemExit();
-                }
-                
+                }                
                 jPanel1.setVisible(false);
                 QuestionType=100; //Random value
                 MaxScore.setText("");
@@ -804,29 +836,37 @@ public class Instructor extends javax.swing.JFrame{
                 OptionB.setText("");
                 OptionC.setText("");
                 OptionD.setText("");
-
                 initsetQuestionNo(++QuestionNumber);
                 }
             }
         }
+        return false;
+    }
+    
+    private void NextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NextActionPerformed
+        MCQNextButton();
     }//GEN-LAST:event_NextActionPerformed
 
-    private void Next1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Next1ActionPerformed
+    public boolean TrueFalseNextButton()
+    {
         if(QuestionType==2)
         {
             if(TrueFalseQuestion.getText().isEmpty())
             {
             JOptionPane.showMessageDialog(null,"Please type out the question before proceeding","Question field empty",JOptionPane.ERROR_MESSAGE);                                                   
+            return false;
             }
             else if(!TrueFalseQuestion.getText().isEmpty())
             {
                 if((!MaxScore.getText().matches("[0-9]+")) || (Integer.parseInt(MaxScore.getText()) == 0))
                 {
                 JOptionPane.showMessageDialog(null,"Maximum marks must be a number greater than 0","Invalid Maximum marks",JOptionPane.ERROR_MESSAGE);                                                                       
+                return false;
                 }
                 else if(!TrueOption.isSelected()&& !FalseOption.isSelected())
                 {
                 JOptionPane.showMessageDialog(null,"Please select a correct option to continue","Correct option not selected",JOptionPane.ERROR_MESSAGE);                                                                       
+                return false;
                 }
                 else
                 {
@@ -890,29 +930,38 @@ public class Instructor extends javax.swing.JFrame{
                 }
             }
         }
+        return false;
+    }
+    
+    private void Next1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Next1ActionPerformed
+        TrueFalseNextButton();
     }//GEN-LAST:event_Next1ActionPerformed
 
-    private void Next2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Next2ActionPerformed
-             
+    public boolean NumericNextButton()
+    {
         if(QuestionType==3)
         {
             if(NumericQuestion.getText().isEmpty())
             {
             JOptionPane.showMessageDialog(null,"Please type out the question before proceeding","Question field empty",JOptionPane.ERROR_MESSAGE);                                                   
+            return false;
             }
             else if(NumericAnswer.getText().isEmpty())
             {
             JOptionPane.showMessageDialog(null,"Please provide the correct answer before proceeding.","Corrcect answer not provided.",JOptionPane.ERROR_MESSAGE);                                                                   
+            return false;
             }
             else if(!NumericAnswer.getText().isEmpty())
             {
                 if((!MaxScore.getText().matches("[0-9]+")) || (Integer.parseInt(MaxScore.getText()) == 0))
                 {
                 JOptionPane.showMessageDialog(null,"Maximum marks must be a number greater than 0","Invalid Maximum marks",JOptionPane.ERROR_MESSAGE);                                                                       
+                return false;
                 }    
                 else if(!NumericAnswer.getText().matches("[0-9]+"))
                 {
                 JOptionPane.showMessageDialog(null,"Please enter a number in the answer field","Invalid input",JOptionPane.ERROR_MESSAGE);                                                                       
+                return false;
                 }
                 else
                 {
@@ -961,6 +1010,11 @@ public class Instructor extends javax.swing.JFrame{
                 }
             }
         }
+        return false;
+    }
+    
+    private void Next2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Next2ActionPerformed
+        NumericNextButton();
     }//GEN-LAST:event_Next2ActionPerformed
 
     private void CreateQuizActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreateQuizActionPerformed
@@ -1298,53 +1352,53 @@ public class Instructor extends javax.swing.JFrame{
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton CreateQuiz;
-    private javax.swing.JButton CreateQuiz1;
-    private javax.swing.JButton CreateQuiz2;
-    private javax.swing.JRadioButton FalseOption;
-    private javax.swing.JRadioButton FirstOption;
-    private javax.swing.JRadioButton FourthOption;
-    private javax.swing.JTextArea MCQQuestion;
-    private java.awt.Label MaxMarks;
-    private javax.swing.JTextField MaxScore;
-    private javax.swing.JRadioButton MultipleChoice;
-    private javax.swing.JButton Next;
-    private javax.swing.JButton Next1;
-    private javax.swing.JButton Next2;
-    private javax.swing.JLabel Number;
-    private javax.swing.JRadioButton Numeric;
-    private javax.swing.JTextField NumericAnswer;
+    public javax.swing.JButton CreateQuiz;
+    public javax.swing.JButton CreateQuiz1;
+    public javax.swing.JButton CreateQuiz2;
+    public javax.swing.JRadioButton FalseOption;
+    public javax.swing.JRadioButton FirstOption;
+    public javax.swing.JRadioButton FourthOption;
+    public javax.swing.JTextArea MCQQuestion;
+    public java.awt.Label MaxMarks;
+    public javax.swing.JTextField MaxScore;
+    public javax.swing.JRadioButton MultipleChoice;
+    public javax.swing.JButton Next;
+    public javax.swing.JButton Next1;
+    public javax.swing.JButton Next2;
+    public javax.swing.JLabel Number;
+    public javax.swing.JRadioButton Numeric;
+    public javax.swing.JTextField NumericAnswer;
     private javax.swing.JTextArea NumericQuestion;
-    private javax.swing.JTextField OptionA;
-    private javax.swing.JTextField OptionB;
-    private javax.swing.JTextField OptionC;
-    private javax.swing.JTextField OptionD;
-    private java.awt.Label Options;
-    private java.awt.Label Options1;
+    public javax.swing.JTextField OptionA;
+    public javax.swing.JTextField OptionB;
+    public javax.swing.JTextField OptionC;
+    public javax.swing.JTextField OptionD;
+    public java.awt.Label Options;
+    public java.awt.Label Options1;
     private javax.swing.JPanel OptionsPanel;
     private javax.swing.JPanel OptionsPanel1;
     private javax.swing.JPanel OptionsPanel2;
-    private javax.swing.JLabel Question;
+    public javax.swing.JLabel Question;
     private javax.swing.JLabel Question1;
     private javax.swing.JLabel Question2;
-    private javax.swing.JLabel QuestionNo;
-    private javax.swing.JRadioButton SecondOption;
-    private javax.swing.JRadioButton ThirdOption;
-    private javax.swing.JRadioButton TrueFalse;
-    private javax.swing.JTextArea TrueFalseQuestion;
-    private javax.swing.JRadioButton TrueOption;
+    public javax.swing.JLabel QuestionNo;
+    public javax.swing.JRadioButton SecondOption;
+    public javax.swing.JRadioButton ThirdOption;
+    public javax.swing.JRadioButton TrueFalse;
+    public javax.swing.JTextArea TrueFalseQuestion;
+    public javax.swing.JRadioButton TrueOption;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.ButtonGroup buttonGroup3;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
-    private java.awt.Label label;
-    private java.awt.Label label1;
-    private java.awt.Label label2;
+    public javax.swing.JPanel jPanel1;
+    public javax.swing.JPanel jPanel2;
+    public javax.swing.JPanel jPanel3;
+    public javax.swing.JScrollPane jScrollPane1;
+    public javax.swing.JScrollPane jScrollPane2;
+    public javax.swing.JScrollPane jScrollPane3;
+    public java.awt.Label label;
+    public java.awt.Label label1;
+    public java.awt.Label label2;
     private java.awt.Label label4;
     // End of variables declaration//GEN-END:variables
 
