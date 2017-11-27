@@ -1,7 +1,0 @@
-SQL--------This is a SQL quiz--------1--------5--------1--------What is the full form of SQL?--------Structured Query Language--------Structured Query List--------Simple Query Language--------None of these--------Structured Query Language
-SQL--------This is a SQL quiz--------1--------5--------2--------DDL Stands for?--------Data Definition Language--------Data Manipulation Language--------Both of above--------None--------Data Definition Language
-SQL--------This is a SQL quiz--------1--------5--------3--------Which operator performs pattern matching?--------BETWEEN operator--------LIKE operator--------EXISTS operator--------None of these--------LIKE operator--------15
-Programming--------This is an AP Quiz--------1--------5--------1--------In SCALA, which kind of programming is performed?--------Functional--------OOP--------Both--------None--------Both
-Programming--------This is an AP Quiz--------2--------5--------2--------JAVAFX is a framework.--------True--------False--------True
-Programming--------This is an AP Quiz--------3--------5--------3--------bool can have how many values?--------2--------15
-
