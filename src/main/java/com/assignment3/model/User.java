@@ -11,15 +11,15 @@ import javax.persistence.Table;
 public class User {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-    private Long id;
+    private int id;
 	private String username;
 	private String password;
 	private String type;
 	private int marks;
-	public long getId() {
+	public int getId() {
 		return id;
 	}
-	public void setId(long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 	public String getType() {

@@ -20,8 +20,9 @@ public class TruefalseDAO {
     }
 
     public String addtruefalse(TrueFalse truefalse) {
-        Long isSuccess = (Long)getSession().save(truefalse);
-        if(isSuccess >= 1){
+    	truefalse.setOptions("True", "False");
+        int truefalse_id = (int)getSession().save(truefalse);
+        if(truefalse_id >= 1){
             return "True/False Question is added!";
         }else{
             return "There was an error adding the True/False Question!";
