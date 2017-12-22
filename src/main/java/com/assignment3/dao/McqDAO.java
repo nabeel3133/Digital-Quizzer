@@ -24,12 +24,12 @@ public class McqDAO {
 		 System.out.println("Before Option B: "+mcq.getOptionB());
 		 System.out.println("Before Option C: "+mcq.getOptionC());
 		 System.out.println("Before Option D: "+mcq.getOptionD());    
-		 Long isSuccess = (Long)getSession().save(mcq);
+		 int mcq_quest_id = (int)getSession().save(mcq);
 		 System.out.println("After Option A: "+mcq.getOptionA());
 		 System.out.println("After Option B: "+mcq.getOptionB());
 		 System.out.println("After Option C: "+mcq.getOptionC());
 		 System.out.println("After Option D: "+mcq.getOptionD());    
-        if(isSuccess >= 1){
+        if(mcq_quest_id >= 1){
             return "MCQ Question is added!";
         }else{
             return "There was an error adding the MCQ!";

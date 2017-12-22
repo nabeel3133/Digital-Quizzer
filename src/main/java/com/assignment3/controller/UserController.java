@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.assignment3.dao.UserDAO;
+import com.assignment3.model.Quiz;
 import com.assignment3.model.User;
 
 @Controller
@@ -35,6 +36,13 @@ public class UserController {
     		return true;
     	else
     		return false;
+    }
+    
+    @RequestMapping(value = "/addstudentmarks" ,method = RequestMethod.POST )
+    @ResponseBody
+    public String addMarks(@RequestBody User student) {
+        String marks_message = userDao.addStudentMarks(student);
+        return marks_message;
     }
 	
 }

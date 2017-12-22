@@ -1,5 +1,6 @@
 package com.assignment3.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorValue;
@@ -14,6 +15,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "Questions")
 @Inheritance(strategy=InheritanceType.SINGLE_TABLE)   
@@ -22,7 +25,7 @@ import javax.persistence.Table;
 public class Question {
 		@Id
 	    @GeneratedValue(strategy = GenerationType.IDENTITY)		
-		private long id;
+		private int id;
 		private String question;
 		private int marks;
 		private String correct;
@@ -31,11 +34,10 @@ public class Question {
 	    @JoinColumn(name="quiz_id", nullable=false)
 	    private Quiz quiz;
 
-		public void setId(long ID)
+		public void setId(int ID)
 		{
 			this.id = ID;
 		}
-		
 		
 	    public void setQuestion(String str) {
 	        this.question=str;

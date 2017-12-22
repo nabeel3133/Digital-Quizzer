@@ -21,10 +21,9 @@ public class QuestionDAO {
 
   public String addNumeric(Question numeric) {
 	  System.out.println("Before saving");
-      Long isSuccess = (Long)getSession().save(numeric);
+      int numeric_id = (int)getSession().save(numeric);
 	  System.out.println("After saving");
-
-      if(isSuccess >= 1){
+      if(numeric_id >= 1){
           return "Numeric Question is added!";
       }else{
           return "There was an error adding the Numeric Question!";
